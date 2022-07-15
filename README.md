@@ -20,19 +20,19 @@ Você pode visitar a aplicação [clicando aqui](https://rocketmeta.netlify.app)
 
 ### Front-end Web
 
-- [ ] Vite
-- [ ] TypeScript
-- [ ] ReactJS
-- [ ] React Date Picker
-- [ ] Toastify
-- [ ] Axios
+- [x] Vite
+- [x] TypeScript
+- [x] ReactJS
+- [x] React Date Picker
+- [x] Toastify
+- [x] Axios
 
 ### Back-end
 
-- [ ] Java
-- [ ] Spring Initializr
-- [ ] Twilio SMS API
-- [ ] SQL Database
+- [x] Java
+- [x] Spring Initializr
+- [x] Twilio SMS API
+- [x] SQL Database
 
 ## 📄 Licença
 
