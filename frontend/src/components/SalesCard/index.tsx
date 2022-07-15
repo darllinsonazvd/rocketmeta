@@ -5,6 +5,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 import { Sale } from '../../models/sale';
 import { BASE_URL } from '../../utils/request';
 import NotifyButton from '../NotifyButton';
+
 import './style.css';
 
 export default function SalesCard() {
@@ -31,6 +32,7 @@ export default function SalesCard() {
         <h2 className="title">Vendas</h2>
         <div>
           <div className="form-control-container">
+            De:
             <DatePicker
               selected={minDate}
               onChange={(date: Date) => setMinDate(date)}
@@ -39,6 +41,7 @@ export default function SalesCard() {
             />
           </div>
           <div className="form-control-container">
+            Até:
             <DatePicker
               selected={maxDate}
               onChange={(date: Date) => setMaxDate(date)}
@@ -72,7 +75,7 @@ export default function SalesCard() {
                     <td>R$ {sale.amount.toFixed(2)}</td>
                     <td>
                       <div className="notify-button-container">
-                        <NotifyButton />
+                        <NotifyButton saleId={sale.id} />
                       </div>
                     </td>
                   </tr>
