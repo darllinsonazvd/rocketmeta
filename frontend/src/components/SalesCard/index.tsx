@@ -2,6 +2,8 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
+import { Sale } from '../../models/sale';
+import { BASE_URL } from '../../utils/request';
 import NotifyButton from '../NotifyButton';
 import './style.css';
 
@@ -12,9 +14,11 @@ export default function SalesCard() {
   const [minDate, setMinDate] = useState(MINIMUM_DATE_TO_PICK);
   const [maxDate, setMaxDate] = useState(MAXIMUM_DATE_TO_PICK);
 
+  const [sales, setSales] = useState<Sale[]>([]);
+
   useEffect(() => {
-    axios.get('http://localhost:8080/sales').then(response => {
-      console.log(response.data.content);
+    axios.get(`${BASE_URL}/sales`).then(response => {
+      setSales(response.data.content);
     });
   }, []);
 
@@ -54,19 +58,23 @@ export default function SalesCard() {
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td className="show-992">#1337</td>
-                <td className="show-576">11/07/2022</td>
-                <td>Darllinson</td>
-                <td className="show-992">15</td>
-                <td className="show-992">13</td>
-                <td>R$ 13371.3</td>
-                <td>
-                  <div className="notify-button-container">
-                    <NotifyButton />
-                  </div>
-                </td>
-              </tr>
+              {sales.map(sale => {
+                return (
+                  <tr key={sale.id}>
+                    <td className="show-992">{sale.id}</td>
+                    <td className="show-576">{new Date(sale.date).toLocaleDateString()}</td>
+                    <td>{sale.sellerName}</td>
+                    <td className="show-992">{sale.visited}</td>
+                    <td className="show-992">{sale.deals}</td>
+                    <td>R$ {sale.amount.toFixed(2)}</td>
+                    <td>
+                      <div className="notify-button-container">
+                        <NotifyButton />
+                      </div>
+                    </td>
+                  </tr>
+                );
+              })}
             </tbody>
           </table>
         </div>
