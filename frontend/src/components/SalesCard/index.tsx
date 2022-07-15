@@ -1,15 +1,22 @@
-import { useState } from 'react';
+import axios from 'axios';
+import { useEffect, useState } from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import NotifyButton from '../NotifyButton';
 import './style.css';
 
 export default function SalesCard() {
-  const min = new Date(new Date().setDate(new Date().getDate() - 365)); // Set min date to pick (1 year ago)
-  const max = new Date(); // Set max date to pick
+  const MINIMUM_DATE_TO_PICK = new Date(new Date().setDate(new Date().getDate() - 365)); // Set min date to pick (1 year ago)
+  const MAXIMUM_DATE_TO_PICK = new Date(); // Set max date to pick
 
-  const [minDate, setMinDate] = useState(min);
-  const [maxDate, setMaxDate] = useState(max);
+  const [minDate, setMinDate] = useState(MINIMUM_DATE_TO_PICK);
+  const [maxDate, setMaxDate] = useState(MAXIMUM_DATE_TO_PICK);
+
+  useEffect(() => {
+    axios.get('http://localhost:8080/sales').then(response => {
+      console.log(response.data.content);
+    });
+  }, []);
 
   return (
     <div className="container">
